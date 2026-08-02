@@ -1,7 +1,29 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git rev-list *)"
+      "Bash(git rev-list *)",
+      "Bash(pip --version)",
+      "Bash(python -m venv venv)",
+      "Bash(./venv/Scripts/python.exe -m pip install --quiet -r requirements.txt)",
+      "Bash(rm -f items.db)",
+      "Bash(./venv/Scripts/python.exe -m uvicorn main:app --port 8000)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8000/items)",
+      "Bash(git -C \"e:/Work/AZM/Enterprise FullStack Program/fullstack-program\" status --porcelain -- Week2/fastapi-items)",
+      "PowerShell(Remove-Item -Recurse -Force \"e:\\\\Work\\\\AZM\\\\Enterprise FullStack Program\\\\fullstack-program\\\\Week2\\\\fastapi-items\" -Confirm:$false)",
+      "PowerShell(Stop-Process -Id 464 -Force -Confirm:$false)",
+      "Bash(where psql *)",
+      "Bash(where pg_ctl)",
+      "Bash(where docker *)",
+      "Bash(docker --version)",
+      "Bash(start \"\" \"C:\\\\Program Files\\\\Docker\\\\Docker\\\\Docker Desktop.exe\")",
+      "Bash(docker run *)",
+      "Bash(./venv/Scripts/python.exe -m pip install --quiet --upgrade pip)",
+      "Bash(docker exec *)",
+      "Bash(tasklist //FI \"IMAGENAME eq python.exe\")",
+      "Bash(docker stop *)",
+      "Bash(docker rm *)",
+      "Skill(update-config)",
+      "Skill(update-config:*)"
     ]
   }
 }
