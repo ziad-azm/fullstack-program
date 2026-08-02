@@ -16,7 +16,14 @@
       "Bash(where docker *)",
       "Bash(docker --version)",
       "Bash(start \"\" \"C:\\\\Program Files\\\\Docker\\\\Docker\\\\Docker Desktop.exe\")",
-      "Bash(docker run *)"
+      "Bash(docker run *)",
+      "Bash(./venv/Scripts/python.exe -m pip install --quiet --upgrade pip)",
+      "Bash(docker exec *)",
+      "Bash(tasklist //FI \"IMAGENAME eq python.exe\")",
+      "Bash(docker stop *)",
+      "Bash(docker rm *)",
+      "Skill(update-config)",
+      "Skill(update-config:*)"
     ]
   }
 }
