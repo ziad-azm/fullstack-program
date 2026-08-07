@@ -1,0 +1,39 @@
+<section class="item-list">
+  <header class="item-list__header">
+    <h1>Items</h1>
+    <a routerLink="/new" class="button">+ New item</a>
+  </header>
+
+  @if (loading()) {
+    <p class="state state--loading">Loading…</p>
+  }
+
+  @if (error()) {
+    <p class="state state--error">{{ error() }}</p>
+  }
+
+  @if (!loading() && !error()) {
+    @if (items().length === 0) {
+      <p class="state state--empty">No items yet. Create the first one!</p>
+    } @else {
+      <table class="item-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>In stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of items(); track item.id) {
+            <tr>
+              <td>{{ item.name }}</td>
+              <td>{{ item.price | number: '1.2-2' }}</td>
+              <td>{{ item.in_stock ? 'Yes' : 'No' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  }
+</section>

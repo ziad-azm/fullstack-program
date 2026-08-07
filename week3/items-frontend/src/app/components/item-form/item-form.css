@@ -1,0 +1,53 @@
+.item-form__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.field {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.field input[type='text'],
+.field input[type='number'] {
+  padding: 0.5rem;
+  border: 1px solid #d2d2d7;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.field--checkbox {
+  flex-direction: row;
+  align-items: center;
+}
+
+.field-error {
+  color: #b3261e;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.state--error {
+  background: #fdecea;
+  color: #b3261e;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+}
+
+button[type='submit'] {
+  padding: 0.6rem 1.25rem;
+  background: #1d1d1f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button[type='submit']:disabled {
+  background: #a1a1a6;
+  cursor: not-allowed;
+}
