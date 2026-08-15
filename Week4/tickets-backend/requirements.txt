@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+psycopg[binary]
+python-dotenv
+
+# Testing (tests/test_tickets.py)
+pytest
+httpx

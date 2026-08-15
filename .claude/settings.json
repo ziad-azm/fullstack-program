@@ -26,7 +26,14 @@
       "Skill(update-config:*)",
       "Bash(node -e ' *)",
       "Bash(./node_modules/.bin/ng version *)",
-      "Bash(timeout 180 ./node_modules/.bin/ng serve --port 4200)"
+      "Bash(timeout 180 ./node_modules/.bin/ng serve --port 4200)",
+      "Bash(echo \"node_modules present: $?\")",
+      "Bash(python -c ' *)",
+      "Bash(python -c \"import psycopg; print\\('psycopg', psycopg.__version__\\)\")",
+      "Bash(python -c \"import fastapi; print\\('fastapi', fastapi.__version__\\)\")",
+      "PowerShell(python -c \"import httpx, pytest; print\\('httpx', httpx.__version__\\); print\\('pytest', pytest.__version__\\)\")",
+      "PowerShell(python \"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\e--Work-AZM-Enterprise-FullStack-Program-fullstack-program\\\\48026560-76ed-4d1a-81e2-92263e7612e6\\\\scratchpad\\\\create_db.py\")",
+      "PowerShell($dst = \"e:\\\\Work\\\\AZM\\\\Enterprise FullStack Program\\\\fullstack-program\\\\Week4\\\\tickets-frontend\"; foreach \\($f in @\\('package.json','package-lock.json','angular.json'\\)\\) { $p = Join-Path $dst $f; \\(Get-Content $p -Raw\\).Replace\\('items-frontend','tickets-frontend'\\) | Set-Content $p -NoNewline -Encoding utf8 }; $p = Join-Path $dst 'src\\\\index.html'; \\(Get-Content $p -Raw\\).Replace\\('ItemsFrontend','TicketsFrontend'\\) | Set-Content $p -NoNewline -Encoding utf8; Select-String -Path \\(Join-Path $dst 'package.json'\\) -Pattern 'name' | Select-Object -First 1; Select-String -Path \\(Join-Path $dst 'src\\\\index.html'\\) -Pattern 'title')"
     ]
   }
 }
