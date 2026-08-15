@@ -2,8 +2,10 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from .config import ALLOWED_ORIGINS
 from .database import init_db
 from .routers.items import router as items_router
 
@@ -15,6 +17,15 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Items API", lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(items_router)
 
 
