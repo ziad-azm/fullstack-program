@@ -1,0 +1,90 @@
+<section class="ticket-list">
+  <header class="ticket-list__header">
+    <h1>Tickets</h1>
+
+    <label class="filter">
+      Status
+      <select [value]="filter()" (change)="onFilterChange($any($event.target).value)">
+        <option value="all">All</option>
+        @for (option of statuses; track option) {
+          <option [value]="option">{{ statusLabel(option) }}</option>
+        }
+      </select>
+    </label>
+  </header>
+
+  <app-ticket-form (created)="loadTickets()" />
+
+  @if (actionError()) {
+    <p class="state state--error">{{ actionError() }}</p>
+  }
+
+  @if (loading()) {
+    <p class="state state--loading">Loading…</p>
+  }
+
+  @if (error()) {
+    <p class="state state--error">{{ error() }}</p>
+  }
+
+  @if (!loading() && !error()) {
+    @if (tickets().length === 0) {
+      <p class="state state--empty">
+        @if (filter() === 'all') {
+          No tickets yet. Create the first one!
+        } @else {
+          No tickets with status “{{ filterLabel() }}”.
+        }
+      </p>
+    } @else {
+      <table class="ticket-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Priority</th>
+            <th>Created</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (ticket of tickets(); track ticket.id) {
+            <tr>
+              <td>
+                <span class="ticket-title">{{ ticket.title }}</span>
+                @if (ticket.description) {
+                  <span class="ticket-description">{{ ticket.description }}</span>
+                }
+              </td>
+              <td>
+                <span class="badge badge--{{ ticket.priority }}">{{ ticket.priority }}</span>
+              </td>
+              <td>{{ ticket.created_at | date: 'medium' }}</td>
+              <td>
+                <select
+                  [value]="ticket.status"
+                  [disabled]="pendingId() === ticket.id"
+                  (change)="onStatusChange(ticket, $any($event.target).value)"
+                >
+                  @for (option of statuses; track option) {
+                    <option [value]="option">{{ statusLabel(option) }}</option>
+                  }
+                </select>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="button button--danger"
+                  [disabled]="pendingId() === ticket.id"
+                  (click)="onDelete(ticket)"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  }
+</section>

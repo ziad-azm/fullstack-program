@@ -1,0 +1,42 @@
+<section class="ticket-form">
+  <h2>New ticket</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label for="title">Title</label>
+      <input id="title" type="text" formControlName="title" placeholder="Printer is jammed" />
+      @if (title.invalid && title.touched) {
+        @if (title.errors?.['required']) {
+          <p class="field-error">Title is required</p>
+        } @else if (title.errors?.['maxlength']) {
+          <p class="field-error">Title must be at most 150 characters</p>
+        }
+      }
+    </div>
+
+    <div class="field">
+      <label for="description">Description <span class="hint">(optional)</span></label>
+      <textarea id="description" rows="3" formControlName="description"></textarea>
+      @if (description.invalid && description.touched) {
+        <p class="field-error">Description must be at most 2000 characters</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="priority">Priority</label>
+      <select id="priority" formControlName="priority">
+        @for (option of priorities; track option) {
+          <option [value]="option">{{ option }}</option>
+        }
+      </select>
+    </div>
+
+    @if (error()) {
+      <p class="state state--error">{{ error() }}</p>
+    }
+
+    <button type="submit" [disabled]="form.invalid || submitting()">
+      {{ submitting() ? 'Creating…' : 'Create ticket' }}
+    </button>
+  </form>
+</section>
