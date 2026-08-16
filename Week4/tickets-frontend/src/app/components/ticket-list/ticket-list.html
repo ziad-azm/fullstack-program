@@ -4,10 +4,12 @@
 
     <label class="filter">
       Status
-      <select [value]="filter()" (change)="onFilterChange($any($event.target).value)">
-        <option value="all">All</option>
+      <!-- The options are rendered after the <select>'s own bindings run, so the
+           selected one is marked on the option itself rather than via [value]. -->
+      <select (change)="onFilterChange($any($event.target).value)">
+        <option value="all" [selected]="filter() === 'all'">All</option>
         @for (option of statuses; track option) {
-          <option [value]="option">{{ statusLabel(option) }}</option>
+          <option [value]="option" [selected]="option === filter()">{{ statusLabel(option) }}</option>
         }
       </select>
     </label>
@@ -62,12 +64,13 @@
               <td>{{ ticket.created_at | date: 'medium' }}</td>
               <td>
                 <select
-                  [value]="ticket.status"
                   [disabled]="pendingId() === ticket.id"
                   (change)="onStatusChange(ticket, $any($event.target).value)"
                 >
                   @for (option of statuses; track option) {
-                    <option [value]="option">{{ statusLabel(option) }}</option>
+                    <option [value]="option" [selected]="option === ticket.status">
+                      {{ statusLabel(option) }}
+                    </option>
                   }
                 </select>
               </td>

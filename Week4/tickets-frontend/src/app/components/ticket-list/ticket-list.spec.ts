@@ -51,6 +51,13 @@ describe('TicketList', () => {
     expect(fixture.nativeElement.textContent).toContain('high');
   });
 
+  it("preselects each ticket's current status in its dropdown", async () => {
+    await flushList([{ ...TICKET, status: 'in_progress' }]);
+
+    const select: HTMLSelectElement = fixture.nativeElement.querySelector('.ticket-table select');
+    expect(select.value).toBe('in_progress');
+  });
+
   it('shows an empty state when there are no tickets', async () => {
     await flushList([]);
 

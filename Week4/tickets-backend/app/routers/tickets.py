@@ -77,6 +77,14 @@ def update_ticket(ticket_id: int, ticket: TicketUpdate):
     # mode="json" turns the status/priority enums into the plain strings the DB stores.
     updates = ticket.model_dump(exclude_unset=True, mode="json")
 
+    # These columns are NOT NULL: an explicit null is a client error, not a 500.
+    nulled = [field for field in ("title", "status", "priority") if field in updates and updates[field] is None]
+    if nulled:
+        raise HTTPException(
+            status_code=400,
+            detail=[{"field": field, "message": f"{field} must not be null"} for field in nulled],
+        )
+
     if not updates:
         row = _fetch_ticket_row(ticket_id)
         if row is None:

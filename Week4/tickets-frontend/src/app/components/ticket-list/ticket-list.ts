@@ -83,7 +83,9 @@ export class TicketList implements OnInit {
       error: () => {
         this.pendingId.set(null);
         this.actionError.set(`Failed to update ticket ${ticket.id}.`);
-        // Reload so the select snaps back to the status the API actually has.
+        // The dropdown already shows the status the user picked. Drop the rows so
+        // the reload rebuilds them, snapping the select back to the API's state.
+        this.tickets.set([]);
         this.loadTickets();
       },
     });

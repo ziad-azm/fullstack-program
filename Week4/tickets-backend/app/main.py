@@ -58,6 +58,11 @@ async def validation_exception_handler(request, exc: RequestValidationError):
     errors = []
     for err in exc.errors():
         loc = [str(part) for part in err.get("loc", []) if part not in ("body", "query", "path")]
-        field = loc[-1] if loc else "body"
+        # Malformed JSON is located by character offset, which is not a field name,
+        # so report it against the body itself.
+        if err.get("type") == "json_invalid":
+            field = "body"
+        else:
+            field = loc[-1] if loc else "body"
         errors.append({"field": field, "message": _field_message(field, err)})
     return JSONResponse(status_code=400, content={"detail": errors})

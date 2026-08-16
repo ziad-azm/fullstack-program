@@ -11,7 +11,7 @@ Enterprise Full-Stack Development Program — a one-month self-study, practical-
 | 1 | Engineering foundations & AI readiness | ✅ Done |
 | 2 | Backend multi-stack | ✅ Done |
 | 3 | Frontend frameworks (Angular) | ✅ Done |
-| 4 | Final full-stack mini assignment | 🔒 Upcoming |
+| 4 | Final full-stack mini assignment | ✅ Done |
 
 ## Structure
 

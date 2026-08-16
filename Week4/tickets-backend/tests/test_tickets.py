@@ -99,7 +99,9 @@ def test_create_with_malformed_json_returns_400(client):
     )
 
     assert response.status_code == 400
-    assert response.json()["detail"][0]["message"] == "request body must be valid JSON"
+    assert response.json()["detail"] == [
+        {"field": "body", "message": "request body must be valid JSON"}
+    ]
 
 
 # ---------- list ----------
@@ -171,6 +173,24 @@ def test_patch_missing_ticket_returns_404(client):
 
     assert response.status_code == 404
     assert response.json() == {"detail": "Ticket 99999999 not found"}
+
+
+def test_patch_with_explicit_null_title_returns_400(client, make_ticket):
+    ticket = make_ticket()
+
+    response = client.patch(f"/tickets/{ticket['id']}", json={"title": None})
+
+    assert response.status_code == 400
+    assert response.json()["detail"] == [{"field": "title", "message": "title must not be null"}]
+
+
+def test_patch_with_empty_body_returns_the_ticket_unchanged(client, make_ticket):
+    ticket = make_ticket()
+
+    response = client.patch(f"/tickets/{ticket['id']}", json={})
+
+    assert response.status_code == 200
+    assert response.json() == ticket
 
 
 def test_patch_with_invalid_status_returns_400(client, make_ticket):
