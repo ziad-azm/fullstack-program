@@ -10,6 +10,7 @@ it — every action goes through the real API and is reflected in the list.
 Week4/
 ├─ tickets-backend/     # FastAPI + PostgreSQL — full CRUD on /tickets
 ├─ tickets-frontend/    # Angular — list + filter + create form + row actions
+├─ HOW_TO_RUN.md        # setup + startup runbook, troubleshooting
 └─ README.md            # this file
 ```
 
@@ -34,7 +35,8 @@ a missing id returns `404 { "detail": "Ticket <id> not found" }`.
 
 ## How to run both together
 
-Two terminals, backend first.
+Two terminals, backend first. Step-by-step setup, the test commands, and a
+troubleshooting table are in [HOW_TO_RUN.md](HOW_TO_RUN.md).
 
 ```bash
 # 1. backend  →  http://localhost:8000  (docs at /docs)
